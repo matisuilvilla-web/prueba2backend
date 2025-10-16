@@ -14,7 +14,7 @@ router.register(r'consultas', ConsultaMedicaViewSet)
 router.register(r'tratamientos', TratamientoViewSet)
 router.register(r'medicamentos', MedicamentoViewSet)
 router.register(r'recetas', RecetaMedicaViewSet)
-router.register(r'detalles-receta', DetalleRecetaViewSet)
+router.register(r'detalles-recetas', DetalleRecetaViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
