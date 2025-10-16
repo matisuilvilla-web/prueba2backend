@@ -1,0 +1,47 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Lista de Consultas Médicas{% endblock %}
+
+{% block content %}
+<form method="get" style="margin-bottom: 20px;">
+    {{ filter.form.as_p }}
+    <button type="submit" class="btn-azul">Filtrar</button>
+    {% if request.GET %}
+        <a href="{% url 'consulta_medica_list' %}" class="btn-azul" style="margin-left: 10px;">Limpiar filtros</a>
+    {% endif %}
+</form>
+
+<h1>Lista de Consultas Médicas</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Paciente</th>
+            <th>Médico</th>
+            <th>Especialidad</th>
+            <th>Diagnóstico</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for consulta in consultas_medicas %}
+            <tr>
+                <td>{{ consulta.fecha }}</td>
+                <td>{{ consulta.paciente.nombre }}</td>
+                <td>{{ consulta.medico.nombre }}</td>
+                <td>{{ consulta.medico.especialidad.nombre }}</td> {# corregí esto porque especialidad está en medico #}
+                <td>{{ consulta.diagnostico }}</td>
+                <td>
+                    <a href="{% url 'consulta_medica_update' consulta.pk %}" class="btn-azul btn-small">Editar</a>
+                    <a href="{% url 'consulta_medica_delete' consulta.pk %}" class="btn-azul btn-small" style="margin-left: 5px;">Eliminar</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="6">No hay consultas médicas registradas.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'consulta_medica_create' %}" class="btn-azul" style="margin-top: 20px; display: inline-block;">Agregar nueva consulta</a>
+{% endblock %}

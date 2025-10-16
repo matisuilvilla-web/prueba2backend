@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{% if consulta_medica %}Editar{% else %}Crear{% endif %} Consulta Médica{% endblock %}
+
+{% block content %}
+    <h1>{% if consulta_medica %}Editar{% else %}Crear{% endif %} Consulta Médica</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+
+    <a href="{% url 'consulta_medica_list' %}">Volver a la lista</a>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Lista de Tratamientos{% endblock %}
+
+{% block content %}
+<h1>Lista de Tratamientos</h1>
+<form method="get" style="margin-bottom: 20px;">
+    {{ filter.form.as_p }}
+    <button type="submit" class="btn-azul">Filtrar</button>
+    {% if request.GET %}
+        <a href="{% url 'tratamiento_list' %}" class="btn-azul" style="margin-left: 10px;">Limpiar filtros</a>
+    {% endif %}
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Receta</th>
+            <th>Medicamento</th>
+            <th>Dosis</th>
+            <th>Duración</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tratamiento in tratamientos %}
+        <tr>
+            <td>{{ tratamiento.receta.id }}</td>
+            <td>{{ tratamiento.medicamento.nombre }}</td>
+            <td>{{ tratamiento.dosis }}</td>
+            <td>{{ tratamiento.duracion }}</td>
+            <td>
+                <a href="{% url 'tratamiento_update' tratamiento.pk %}" class="btn-azul btn-small">Editar</a>
+                <a href="{% url 'tratamiento_delete' tratamiento.pk %}" class="btn-azul btn-small" style="margin-left: 5px;">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5">No hay tratamientos registrados.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'tratamiento_create' %}" class="btn-azul" style="margin-top: 20px; display: inline-block;">Agregar nuevo tratamiento</a>
+{% endblock %}

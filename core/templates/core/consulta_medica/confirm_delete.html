@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Eliminar Consulta Médica{% endblock %}
+
+{% block content %}
+    <h1>Eliminar Consulta Médica</h1>
+    <p>¿Seguro que deseas eliminar la consulta del paciente <strong>{{ object.paciente.nombre }}</strong> con el médico <strong>{{ object.medico.nombre }}</strong>?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Eliminar</button>
+        <a href="{% url 'consulta_medica_list' %}">Cancelar</a>
+    </form>
+{% endblock %}

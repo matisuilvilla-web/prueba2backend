@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Salud Vital{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+</head>
+<body>
+
+    <div class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'core/img/logo.png' %}" alt="Salud Vital">
+                </a>
+            </div>
+
+            <nav class="nav-links">
+                <h4>👨‍⚕️ Personal Médico</h4>
+                <a href="{% url 'medico_list' %}">Médicos</a>
+                <a href="{% url 'especialidad_list' %}">Especialidades</a>
+
+                <h4>📋 Atenciones</h4>
+                <a href="{% url 'paciente_list' %}">Pacientes</a>
+                <a href="{% url 'consulta_medica_list' %}">Consultas</a>
+                <a href="{% url 'receta_medica_list' %}">Recetas</a>
+                <a href="{% url 'detalle_receta_list' %}">Detalles Receta</a>
+                <a href="{% url 'tratamiento_list' %}">Tratamientos</a>
+
+                <h4>💊 Farmacia</h4>
+                <a href="{% url 'medicamento_list' %}">Medicamentos</a>
+            </nav>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="main-content">
+            {% block content %}{% endblock %}
+            <footer>
+                Desarrollado por Matías Suil – TI3041/AP-172-N4/D – Año: 2025
+            </footer>
+        </main>
+    </div>
+
+</body>
+</html>
+
+

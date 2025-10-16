@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{% if tratamiento %}Editar{% else %}Crear{% endif %} Tratamiento{% endblock %}
+
+{% block content %}
+<h1>{% if tratamiento %}Editar{% else %}Crear{% endif %} Tratamiento</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar</button>
+</form>
+
+<a href="{% url 'tratamiento_list' %}">Volver a la lista</a>
+{% endblock %}

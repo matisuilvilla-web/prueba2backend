@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{% if receta %}Editar{% else %}Crear{% endif %} Receta Médica{% endblock %}
+
+{% block content %}
+<h1>{% if receta %}Editar{% else %}Crear{% endif %} Receta Médica</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar</button>
+</form>
+
+<a href="{% url 'receta_medica_list' %}">Volver a la lista</a>
+{% endblock %}

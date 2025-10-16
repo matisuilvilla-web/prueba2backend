@@ -1,0 +1,43 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Lista de Medicamentos{% endblock %}
+
+{% block content %}
+<h1>Lista de Medicamentos</h1>
+
+<form method="get" style="margin-bottom: 20px;">
+    {{ filter.form.as_p }}
+    <button type="submit" class="btn-azul">Filtrar</button>
+    {% if request.GET %}
+        <a href="{% url 'medicamento_list' %}" class="btn-azul" style="margin-left: 10px;">Limpiar filtros</a>
+    {% endif %}
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Dosis Recomendada</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for medicamento in medicamentos %}
+            <tr>
+                <td>{{ medicamento.nombre }}</td>
+                <td>{{ medicamento.descripcion }}</td>
+                <td>{{ medicamento.dosis_recomendada }}</td>
+                <td>
+                    <a href="{% url 'medicamento_update' medicamento.pk %}" class="btn-azul btn-small">Editar</a>
+                    <a href="{% url 'medicamento_delete' medicamento.pk %}" class="btn-azul btn-small" style="margin-left: 5px;">Eliminar</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="4">No hay medicamentos registrados.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'medicamento_create' %}" class="btn-azul" style="margin-top: 20px; display: inline-block;">Agregar nuevo medicamento</a>
+{% endblock %}

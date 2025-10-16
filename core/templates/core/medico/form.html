@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{% if medico %}Editar{% else %}Crear{% endif %} Médico{% endblock %}
+
+{% block content %}
+<h1>{% if medico %}Editar{% else %}Crear{% endif %} Médico</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar</button>
+</form>
+
+<a href="{% url 'medico_list' %}">Volver a la lista</a>
+{% endblock %}

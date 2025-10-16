@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Eliminar Detalle de Receta{% endblock %}
+
+{% block content %}
+    <h1>Eliminar Detalle de Receta</h1>
+    <p>¿Seguro que deseas eliminar el detalle del medicamento <strong>{{ object.medicamento.nombre }}</strong>?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Eliminar</button>
+        <a href="{% url 'detalle_receta_list' %}">Cancelar</a>
+    </form>
+{% endblock %}

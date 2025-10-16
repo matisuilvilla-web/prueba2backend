@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Lista de Detalles de Recetas{% endblock %}
+
+{% block content %}
+<h1>Lista de Detalles de Recetas</h1>
+
+<form method="get" style="margin-bottom: 20px;">
+    {{ filter.form.as_p }}
+    <button type="submit" class="btn-azul">Filtrar</button>
+    {% if request.GET %}
+        <a href="{% url 'detalle_receta_list' %}" class="btn-azul" style="margin-left: 10px;">Limpiar filtros</a>
+    {% endif %}
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Receta</th>
+            <th>Medicamento</th>
+            <th>Dosis</th>
+            <th>Indicaciones</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for detalle in detalles_receta %}
+            <tr>
+                <td>{{ detalle.receta.id }}</td> {# Aquí asumo que el FK es 'receta' no 'receta_medica' #}
+                <td>{{ detalle.medicamento.nombre }}</td>
+                <td>{{ detalle.dosis }}</td>
+                <td>{{ detalle.frecuencia }}</td> {# corregí porque en tu modelo es 'frecuencia', no 'indicaciones' #}
+                <td>
+                    <a href="{% url 'detalle_receta_update' detalle.pk %}" class="btn-azul btn-small">Editar</a>
+                    <a href="{% url 'detalle_receta_delete' detalle.pk %}" class="btn-azul btn-small" style="margin-left: 5px;">Eliminar</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="5">No hay detalles de recetas registrados.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'detalle_receta_create' %}" class="btn-azul" style="margin-top: 20px; display: inline-block;">Agregar nuevo detalle</a>
+{% endblock %}

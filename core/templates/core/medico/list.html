@@ -1,0 +1,43 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Lista de Médicos{% endblock %}
+
+{% block content %}
+<h1>Lista de Médicos</h1>
+
+<form method="get" style="margin-bottom: 20px;">
+    {{ filter.form.as_p }}
+    <button type="submit" class="btn-azul">Filtrar</button>
+    {% if request.GET %}
+        <a href="{% url 'medico_list' %}" class="btn-azul" style="margin-left: 10px;">Limpiar filtros</a>
+    {% endif %}
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Especialidad</th>
+            <th>Centro</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for medico in medicos %}
+        <tr>
+            <td>{{ medico.nombre }}</td>
+            <td>{{ medico.especialidad.nombre }}</td>
+            <td>{{ medico.centro }}</td>
+            <td>
+                <a href="{% url 'medico_update' medico.pk %}" class="btn-azul btn-small">Editar</a>
+                <a href="{% url 'medico_delete' medico.pk %}" class="btn-azul btn-small" style="margin-left: 5px;">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4">No hay médicos registrados.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'medico_create' %}" class="btn-azul" style="margin-top: 20px; display: inline-block;">Agregar nuevo médico</a>
+{% endblock %}

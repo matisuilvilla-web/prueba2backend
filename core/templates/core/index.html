@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+    <h1>Bienvenido a Salud Vital</h1>
+    <p>Seleccione una opción desde el menú lateral.</p>
+
+    <div class="dashboard-links">
+        <a href="{% url 'paciente_list' %}">👤 Gestionar Pacientes</a>
+        <a href="{% url 'medico_list' %}">👨‍⚕️ Gestionar Médicos</a>
+        <a href="{% url 'consulta_medica_list' %}">📋 Ver Consultas</a>
+        <a href="{% url 'receta_medica_list' %}">📝 Recetas</a>
+    </div>
+{% endblock %}

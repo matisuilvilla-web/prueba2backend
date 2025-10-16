@@ -1,0 +1,43 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Lista de Pacientes{% endblock %}
+
+{% block content %}
+<h1>Lista de Pacientes</h1>
+
+<form method="get" style="margin-bottom: 20px;">
+    {{ filter.form.as_p }}
+    <button type="submit" class="btn-azul">Filtrar</button>
+    {% if request.GET %}
+        <a href="{% url 'paciente_list' %}" class="btn-azul" style="margin-left: 10px;">Limpiar filtros</a>
+    {% endif %}
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>RUT</th>
+            <th>Edad</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for paciente in object_list %}
+        <tr>
+            <td>{{ paciente.nombre }}</td>
+            <td>{{ paciente.rut }}</td>
+            <td>{{ paciente.edad }}</td>
+            <td>
+                <a href="{% url 'paciente_update' paciente.pk %}" class="btn-azul btn-small">Editar</a>
+                <a href="{% url 'paciente_delete' paciente.pk %}" class="btn-azul btn-small" style="margin-left: 5px;">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4">No hay pacientes registrados.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'paciente_create' %}" class="btn-azul" style="margin-top: 20px; display: inline-block;">Agregar nuevo paciente</a>
+{% endblock %}

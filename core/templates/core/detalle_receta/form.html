@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{% if detalle_receta %}Editar{% else %}Crear{% endif %} Detalle de Receta{% endblock %}
+
+{% block content %}
+    <h1>{% if detalle_receta %}Editar{% else %}Crear{% endif %} Detalle de Receta</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+
+    <a href="{% url 'detalle_receta_list' %}">Volver a la lista</a>
+{% endblock %}

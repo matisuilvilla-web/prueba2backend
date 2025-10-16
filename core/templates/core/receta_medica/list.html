@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Lista de Recetas Médicas{% endblock %}
+
+{% block content %}
+<h1>Lista de Recetas Médicas</h1>
+<form method="get" style="margin-bottom: 20px;">
+    {{ filter.form.as_p }}
+    <button type="submit" class="btn-azul">Filtrar</button>
+    {% if request.GET %}
+        <a href="{% url 'receta_medica_list' %}" class="btn-azul" style="margin-left: 10px;">Limpiar filtros</a>
+    {% endif %}
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Consulta</th>
+            <th>Fecha</th>
+            <th>Médico</th>
+            <th>Paciente</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for receta in recetas_medicas %}
+        <tr>
+            <td>{{ receta.consulta.id }}</td>
+            <td>{{ receta.fecha }}</td>
+            <td>{{ receta.consulta.medico.nombre }}</td>
+            <td>{{ receta.consulta.paciente.nombre }}</td>
+            <td>
+                <a href="{% url 'receta_medica_update' receta.pk %}" class="btn-azul btn-small">Editar</a>
+                <a href="{% url 'receta_medica_delete' receta.pk %}" class="btn-azul btn-small" style="margin-left: 5px;">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5">No hay recetas médicas registradas.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'receta_medica_create' %}" class="btn-azul" style="margin-top: 20px; display: inline-block;">Agregar nueva receta</a>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Lista de Especialidades{% endblock %}
+
+{% block content %}
+<h1>Lista de Especialidades</h1>
+
+<form method="get" style="margin-bottom: 20px;">
+    {{ filter.form.as_p }}
+    <button type="submit" class="btn-azul">Filtrar</button>
+    {% if request.GET %}
+        <a href="{% url 'especialidad_list' %}" class="btn-azul" style="margin-left: 10px;">Limpiar filtros</a>
+    {% endif %}
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for especialidad in especialidades %}
+            <tr>
+                <td>{{ especialidad.nombre }}</td>
+                <td>{{ especialidad.descripcion }}</td>
+                <td>
+                    <a href="{% url 'especialidad_update' especialidad.pk %}" class="btn-azul btn-small">Editar</a>
+                    <a href="{% url 'especialidad_delete' especialidad.pk %}" class="btn-azul btn-small" style="margin-left: 5px;">Eliminar</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="3">No hay especialidades registradas.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'especialidad_create' %}" class="btn-azul" style="margin-top: 20px; display: inline-block;">Agregar nueva especialidad</a>
+{% endblock %}
