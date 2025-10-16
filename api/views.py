@@ -15,6 +15,8 @@ from .serializers import (
     MedicamentoSerializer, RecetaMedicaSerializer, DetalleRecetaSerializer
 )
 
+ """API RESTful para operaciones CRUD de pacientes."""
+
 class EspecialidadViewSet(viewsets.ModelViewSet):
     queryset = Especialidad.objects.all()
     serializer_class = EspecialidadSerializer
