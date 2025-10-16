@@ -6,6 +6,17 @@ from .views import (
     RecetaMedicaViewSet, DetalleRecetaViewSet
 )
 
+"""
+Módulo de enrutamiento para los endpoints de la API REST del sistema Salud Vital.
+
+Define las rutas para los recursos de la API, tales como médicos, pacientes,
+consultas médicas, tratamientos, recetas y medicamentos.
+
+Estas rutas devuelven datos en formato JSON y están orientadas al consumo
+por clientes frontend o integraciones externas.
+"""
+
+
 router = DefaultRouter()
 router.register(r'especialidades', EspecialidadViewSet)
 router.register(r'medicos', MedicoViewSet)
