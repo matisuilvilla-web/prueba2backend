@@ -1,8 +1,12 @@
 """
-Define los modelos principales de "Salud Vital", representando las entidades del sistema de salud.
-Incluye especialidades médicas, centros médicos, médicos, pacientes, consultas médicas, tratamientos, medicamentos,
-recetas médicas y detalles de recetas. Cada modelo contiene campos relevantes y relaciones entre entidades,
-permitiendo la gestión estructurada y coherente de la información clínica.
+Módulo de modelos para el sistema Salud Vital.
+
+Contiene la definición de las entidades principales que forman la base
+de datos del sistema, incluyendo Paciente, Médico, Consulta Médica,
+Tratamiento, Receta Médica y Medicamento.
+
+Cada clase representa una tabla en la base de datos PostgreSQL y define
+los campos y relaciones necesarias para la gestión clínica.
 """
 
 from django.db import models
